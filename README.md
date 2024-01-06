@@ -1,8 +1,29 @@
-# React + Vite
+Patient Manager 🏥✨
+Overview
+Welcome to Patient Manager, a robust patient administration system developed with React and styled using Tailwind CSS. This application allows healthcare professionals and administrators to effortlessly manage patient records, including adding, editing, and deleting entries.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features
+Add Patients: Quickly add new patient profiles to the system.
+Edit Information: Easily update and maintain accurate patient details.
+Delete Functionality: Remove outdated records or unnecessary entries with a click.
+Why Patient Manager?
+User-Friendly Interface: Sleek and intuitive design for a smooth user experience.
+Real-Time Updates: Changes reflect instantly, ensuring up-to-date information.
+Responsive Design: Accessible on various devices, providing flexibility for users on the go.
+Tech Stack
+React: Front-end framework for building dynamic user interfaces.
+Tailwind CSS: Utility-first CSS framework for rapid and responsive styling.
 
-Currently, two official plugins are available:
+Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-Clone the repository:
+git clone https://github.com/your-username/patient-manager.git
+
+-Install dependencies:
+cd patient-manager
+npm install
+
+-Run the application:
+npm start
+
+Open your browser and go to localhost to view Patient Manager.
