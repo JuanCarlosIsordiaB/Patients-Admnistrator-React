@@ -31,7 +31,7 @@ export const Paciente = ({patient}) => {
 
 
   return (
-    <div className='mt-5 bg-white shadow-md p-5 md:ml-5 rounded-md mx-2'>
+    <div className='mt-5 bg-white shadow-md p-5 mb-2 md:ml-5 rounded-md mx-2'>
         <p className='font-bold mb-3 text-gray-700 uppercase '>Nombre: {''}
           <span className='font-normal normal-case'>{patient.nombre}</span>
         </p>
