@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer } from "react"
 import { AppReducer } from "./AppReducer";
 
 
@@ -10,12 +10,18 @@ export const useGlobalState = () => {
 }
 
 const initalState = {
-    patients: []
+    patients: JSON.parse(localStorage.getItem('patients')) || [],
+    editingPatient: null
 }
 
 export const GloabalProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(AppReducer, initalState);
+
+    useEffect(() => {
+        localStorage.setItem('patients', JSON.stringify(state.patients));
+    }, [state.patients]);
+    
 
     const addPatient = (patient) => {
         dispatch({
@@ -32,19 +38,25 @@ export const GloabalProvider = ({children}) => {
         })
     }
 
-    const editPatient = (id) => {
+    const editPatient = (patient) => {
         dispatch({
             type: 'EDIT_PATIENT',
-            payload: id
+            payload: patient
         })
     }
+    const setEditingPatient = (patient) => {
+        dispatch({ type: 'SET_EDITING_PATIENT', payload: patient });
+      };
 
   return (
     <Context.Provider value={{
         patients: state.patients,
+        editingPatient: state.editingPatient,
         addPatient,
-        deletePatient
-    }}>
+        deletePatient,
+        editPatient,
+        setEditingPatient,
+      }}>
         {children}
     </Context.Provider>
   )

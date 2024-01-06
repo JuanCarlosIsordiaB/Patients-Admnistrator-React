@@ -1,8 +1,5 @@
-
-
-import React from 'react'
-import { Paciente } from './Paciente'
-import { useGlobalState } from '../context/GlobalState'
+import { Paciente } from './Paciente';
+import { useGlobalState } from '../context/GlobalState';
 
 export const Listado = () => {
 
@@ -18,6 +15,8 @@ export const Listado = () => {
           )
         }  
       </div>
+      
     </div>
+    
   )
 }

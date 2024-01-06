@@ -1,11 +1,12 @@
-
-
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useGlobalState } from '../context/GlobalState';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 export const Formulario = () => {
 
-  const {addPatient} = useGlobalState(); 
+  const {addPatient, editPatient, editingPatient, setEditingPatient } = useGlobalState(); 
 
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
@@ -15,32 +16,89 @@ export const Formulario = () => {
 
   const [error, setError] = useState(false);
 
+  const isEditingMode = !!editingPatient;
+
+  useEffect(() => {
+    // Si estamos en modo de edición, cargamos los detalles del paciente actual
+    if (editingPatient) {
+      setNombre(editingPatient.nombre || '');
+      setEmail(editingPatient.email || '');
+      setDia(editingPatient.dia || '');
+      setNumero(editingPatient.numero || '');
+      setSintomas(editingPatient.sintomas || '');
+    }
+  }, [editingPatient]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if([nombre,email,dia,numero,sintomas].includes('')){
+    if ([nombre, email, dia, numero, sintomas].includes('')) {
       setError(true);
       return;
     }
 
     setError(false);
 
-    addPatient({
-      id: Date.now(),
-      nombre,
-      email,
-      dia,
-      numero,
-      sintomas
-    });
+    if (editingPatient) {
+      //Entramos al modo edicion
+      editPatient({
+        id: editingPatient.id,
+        nombre,
+        email,
+        dia,
+        numero,
+        sintomas,
+      });
 
-    // Limpiar los campos después de enviar el formulario
-    setNombre('');
-    setEmail('');
-    setDia('');
-    setNumero('');
-    setSintomas('');
-  }
+      setNombre('');
+      setEmail('');
+      setDia('');
+      setNumero('');
+      setSintomas('');
+
+      toast.success('Patient Edited', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      //Con este null salimos del modo edicion
+      setEditingPatient(null);
+    } else {
+      // Estamos en modo de agregar
+      addPatient({
+        id: Date.now(),
+        nombre,
+        email,
+        dia,
+        numero,
+        sintomas,
+      });
+
+      toast.success('Patient Added', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+
+      setNombre('');
+      setEmail('');
+      setDia('');
+      setNumero('');
+      setSintomas('');
+    }
+  };
 
   return (
     <div className='md:w-1/2 lg:w-2/5 '>
@@ -143,10 +201,25 @@ export const Formulario = () => {
         </div>
         <input 
           type="submit" 
-          value='Add Patient' 
+          value={isEditingMode ? 'Edit Patient' : 'Add Patient'} 
           className='mt-2 bg-indigo-400 w-full text-center p-2 text-white font-semibold rounded-md cursor-pointer hover:bg-indigo-600 transition-colors'
         />
       </form>
+      <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
+    
   )
 }
