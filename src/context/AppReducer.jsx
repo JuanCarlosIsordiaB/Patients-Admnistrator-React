@@ -8,8 +8,13 @@ export const AppReducer = (state, action) => {
                 ...state,
                 patients: [...state.patients, action.payload]
             }
-        case 'DELETE_PATIENT':
-            return []
+        case 'DELTE_PATIENT':
+            return {
+                ...state,
+                patients: state.patients.filter( patient =>
+                    patient.id !== action.payload
+                )
+            }
         case 'EDIT_PATIENT':
             return []
     }

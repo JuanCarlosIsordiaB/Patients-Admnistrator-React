@@ -30,8 +30,16 @@ export const Formulario = () => {
       nombre,
       email,
       dia,
-      numero,sintomas
-    })
+      numero,
+      sintomas
+    });
+
+    // Limpiar los campos después de enviar el formulario
+    setNombre('');
+    setEmail('');
+    setDia('');
+    setNumero('');
+    setSintomas('');
   }
 
   return (

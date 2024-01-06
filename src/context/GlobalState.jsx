@@ -25,7 +25,7 @@ export const GloabalProvider = ({children}) => {
         
     }
 
-    const deletePatienT = (id) => {
+    const deletePatient = (id) => {
         dispatch({
             type: 'DELTE_PATIENT',
             payload: id
@@ -42,7 +42,8 @@ export const GloabalProvider = ({children}) => {
   return (
     <Context.Provider value={{
         patients: state.patients,
-        addPatient
+        addPatient,
+        deletePatient
     }}>
         {children}
     </Context.Provider>
