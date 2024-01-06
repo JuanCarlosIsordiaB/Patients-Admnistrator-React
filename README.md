@@ -17,7 +17,7 @@ Tailwind CSS: Utility-first CSS framework for rapid and responsive styling.
 Getting Started
 
 -Clone the repository:
-git clone https://github.com/your-username/patient-manager.git
+git clone https://github.com/JuanCarlosIsordiaB/Patients-Admnistrator-React.git
 
 -Install dependencies:
 cd patient-manager
